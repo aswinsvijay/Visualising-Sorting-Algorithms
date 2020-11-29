@@ -36,7 +36,7 @@ def selection(data):
         for j in range(i+1,n):
             data[i][1] = 'red'
             data[j][1] = 'red'
-            data[smallpos][1] = 'red'
+            data[smallpos][1] = 'blue'
 
             datalist.append(copy.deepcopy(data))
 
@@ -47,18 +47,17 @@ def selection(data):
             if data[j][0] < data[smallpos][0]:
                 smallpos = j
 
-        data[i] , data[smallpos] = data[smallpos] , data[i]
-
         data[i][1] = 'red'
-        data[smallpos][1] = 'red'
+        data[smallpos][1] = 'blue'
+
+        data[i] , data[smallpos] = data[smallpos] , data[i]
 
         datalist.append(copy.deepcopy(data))
 
-        data[i][1] = 'white'
         data[smallpos][1] = 'white'
+        data[i][1] = 'green'
     
-    data[n-2][1] = 'white'
-    data[n-1][1] = 'white'
+    data[n-1][1] = 'green'
 
     datalist.append(copy.deepcopy(data))
 

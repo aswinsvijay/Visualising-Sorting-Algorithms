@@ -32,12 +32,12 @@ def animate(datalist):
             clk.tick(fps)
         pygame.event.wait()
 
-algos = [bubble]
+algos = [bubble,selection]
 
 def main():
     data = datagen()
 
-    algo = int(input('\nAlgorithms:\n1. Bubble\nEnter choice:'))
+    algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\nEnter choice:'))
 
     datalist = algos[algo-1](data)
     animate(datalist)

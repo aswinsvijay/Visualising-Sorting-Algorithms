@@ -16,8 +16,7 @@ def bubble(data):
 
             if (data[j][0] > data[j+1][0]):
                 data[j] , data[j+1] = data[j+1] , data[j]
-
-            datalist.append(copy.deepcopy(data))
+                datalist.append(copy.deepcopy(data))
 
             data[j][1] = 'white'
             data[j+1][1] = 'white'

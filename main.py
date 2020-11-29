@@ -4,11 +4,13 @@ import pygame
 from config import *
 from sorts import *
 
+#generate shuffled list
 def datagen():
     data = [[i,'white'] for i in range(1,n+1)]
     random.shuffle(data)
     return data
 
+#animate the sorting
 def animate(datalist):
     pygame.init()
     clk = pygame.time.Clock()
@@ -19,10 +21,11 @@ def animate(datalist):
         for data in datalist:
             dis.fill('black')
 
+            #draiwing rectangles for the data
             for i in range(n):
                 pygame.draw.rect(dis,data[i][1],[i*(w/n),h-(h/n)*data[i][0],(w/n),(h/n)*data[i][0]])
             
-            pygame.display.flip()
+            pygame.display.flip()   #update the display
 
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
@@ -32,7 +35,7 @@ def animate(datalist):
             clk.tick(fps)
         pygame.event.wait()
 
-algos = [bubble,selection]
+algos = [bubble,selection]  #list of available algorithms
 
 def main():
     data = datagen()

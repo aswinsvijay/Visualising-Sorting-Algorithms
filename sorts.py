@@ -2,6 +2,7 @@ import copy
 
 from config import n
 
+#bubble sort
 def bubble(data):
     datalist = list()
 
@@ -27,6 +28,7 @@ def bubble(data):
 
     return datalist
 
+#selection sort
 def selection(data):
     datalist = list()
 

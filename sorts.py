@@ -35,6 +35,9 @@ def selection(data):
     for i in range(n-1):
         smallpos = i
         for j in range(i+1,n):
+            if data[j][0] < data[smallpos][0]:
+                smallpos = j
+                
             data[i][1] = 'red'
             data[j][1] = 'red'
             data[smallpos][1] = 'blue'
@@ -44,9 +47,6 @@ def selection(data):
             data[i][1] = 'white'
             data[j][1] = 'white'
             data[smallpos][1] = 'white'
-
-            if data[j][0] < data[smallpos][0]:
-                smallpos = j
 
         data[i][1] = 'red'
         data[smallpos][1] = 'blue'

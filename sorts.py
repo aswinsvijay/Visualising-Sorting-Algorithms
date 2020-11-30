@@ -1,6 +1,6 @@
 import copy
 
-from config import n
+from main import n
 
 #bubble sort
 def bubble(data):

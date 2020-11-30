@@ -1,8 +1,35 @@
 import random
 import pygame
+import argparse
 
 from config import *
 from sorts import *
+
+ap = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,conflict_handler="resolve")
+
+ap.add_argument(dest='algo',
+                choices={'bubble','selection'},nargs='?',
+                help='sort algorithm to use')
+ap.add_argument('-n',
+                type=int,default=n,
+                help='number of elements to sort')
+ap.add_argument('-w','--width',
+                type=int,default=w,
+                help='window width')
+ap.add_argument('-h','--height',
+                type=int,default=h,
+                help='window height')
+ap.add_argument('--fps',
+                type=int,default=fps,
+                help='animation frame rate')
+
+args = ap.parse_args()
+
+algo = args.algo
+n = args.n
+w = args.width
+h = args.height
+fps = args.fps
 
 #generate shuffled list
 def datagen():
@@ -45,14 +72,18 @@ def animate(datalist):
                 pygame.event.wait()
         pygame.event.wait()
 
-algos = [bubble,selection]  #list of available algorithms
-
 def main():
     data = datagen()
 
-    algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\nEnter choice:'))
+    algo = args.algo
 
-    datalist = algos[algo-1](data)
+    if algo:
+        datalist = globals()[algo](data)
+    else:
+        algos = [bubble,selection]      #list of available algorithms
+        algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\nEnter choice:'))
+        datalist = algos[algo-1](data)
+    
     animate(datalist)
 
 if __name__ == "__main__":

@@ -32,7 +32,17 @@ def animate(datalist):
                     running = False
                     pygame.quit()
                     return
-            clk.tick(fps)
+
+            if fps:
+                clk.tick(fps)
+            else:
+                pygame.event.wait()
+                for event in pygame.event.get():
+                    if event.type==pygame.QUIT:
+                        running = False
+                        pygame.quit()
+                        return
+                pygame.event.wait()
         pygame.event.wait()
 
 algos = [bubble,selection]  #list of available algorithms

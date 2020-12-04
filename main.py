@@ -7,8 +7,8 @@ from sorts import *
 
 ap = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter,conflict_handler="resolve")
 
-ap.add_argument(dest='algo',
-                choices={'bubble','selection'},nargs='?',
+ap.add_argument(dest='algo',nargs='?',
+                choices={'bubble','selection','insertion'},
                 help='sort algorithm to use')
 ap.add_argument('-n',
                 type=int,default=n,
@@ -80,8 +80,8 @@ def main():
     if algo:
         datalist = globals()[algo](data)
     else:
-        algos = [bubble,selection]      #list of available algorithms
-        algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\nEnter choice:'))
+        algos = [bubble,selection,insertion]      #list of available algorithms
+        algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\n3. Insertion\nEnter choice:'))
         datalist = algos[algo-1](data)
     
     animate(datalist)

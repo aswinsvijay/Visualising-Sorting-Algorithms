@@ -63,3 +63,27 @@ def selection(data):
     datalist.append(copy.deepcopy(data))
 
     return datalist
+
+#insertion sort
+def insertion(data):
+    datalist = list()
+
+    data[0][1] = 'green'
+
+    for i in range(1,n):
+        x = data[i][0]
+        j = i-1
+        data[i][1] = 'red'
+        datalist.append(copy.deepcopy(data))
+        data[j+1][1] = 'green'
+        while(j>=0 and x<data[j][0]):
+            data[j+1][0] = data[j][0]
+            data[j] = [x,'red']
+            datalist.append(copy.deepcopy(data))
+            data[j][1] = 'green'
+            j -= 1
+        data[j+1][0] = x
+    
+    datalist.append(copy.deepcopy(data))
+
+    return datalist

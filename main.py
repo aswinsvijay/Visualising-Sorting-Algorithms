@@ -81,8 +81,11 @@ def main():
         datalist = globals()[algo](data)
     else:
         algos = [bubble,selection,insertion]      #list of available algorithms
-        algo = int(input('\nAlgorithms:\n1. Bubble\n2. Selection\n3. Insertion\nEnter choice:'))
-        datalist = algos[algo-1](data)
+        algo = int(input('Algorithms:\n1. Bubble\n2. Selection\n3. Insertion\nEnter choice(0 to exit):'))
+        if algo in range(1,len(algos)+1):
+            datalist = algos[algo-1](data)
+        else:
+            exit()
     
     animate(datalist)
 

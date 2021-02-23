@@ -1,7 +1,7 @@
 import random
 import pygame
 import argparse
-
+from copy import deepcopy
 from config import *
 from sorts import *
 
@@ -38,13 +38,16 @@ def datagen():
     return data
 
 #animate the sorting
-def animate(datalist):
+def animate(algo,data):
+    data_backup = deepcopy(data)
     pygame.init()
     clk = pygame.time.Clock()
     dis = pygame.display.set_mode((w,h))
     running = True
 
     while running:
+        data = deepcopy(data_backup)
+        datalist = algo(data)
         for data in datalist:
             dis.fill('black')
 
@@ -78,16 +81,16 @@ def main():
     algo = args.algo
 
     if algo:
-        datalist = globals()[algo](data)
+        algo = globals()[algo]
     else:
         algos = [bubble,selection,insertion]      #list of available algorithms
         algo = int(input('Algorithms:\n1. Bubble\n2. Selection\n3. Insertion\nEnter choice(0 to exit):'))
         if algo in range(1,len(algos)+1):
-            datalist = algos[algo-1](data)
+            algo = algos[algo-1]
         else:
             exit()
     
-    animate(datalist)
+    animate(algo,data)
 
 if __name__ == "__main__":
     main()

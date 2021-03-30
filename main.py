@@ -51,7 +51,7 @@ def animate(algo,data):
         for data in datalist:
             dis.fill('black')
 
-            #draiwing rectangles for the data
+            #drawing rectangles for the data
             for i in range(n):
                 pygame.draw.rect(dis,data[i][1],[i*(w/n),h-(h/n)*data[i][0],(w/n),(h/n)*data[i][0]])
             

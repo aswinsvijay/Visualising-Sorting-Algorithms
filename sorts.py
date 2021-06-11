@@ -1,5 +1,3 @@
-import copy
-
 from main import n
 
 #bubble sort
@@ -14,7 +12,7 @@ def bubble(data):
             yield(data)
 
             if (data[j][0] > data[j+1][0]):
-                data[j] , data[j+1] = data[j+1] , data[j]
+                data[j], data[j+1] = data[j+1], data[j]
                 yield(data)
 
             data[j][1] = 'white'
@@ -28,7 +26,7 @@ def bubble(data):
 def selection(data):
     for i in range(n-1):
         smallpos = i
-        for j in range(i+1,n):
+        for j in range(i+1, n):
             if data[j][0] < data[smallpos][0]:
                 smallpos = j
                 
@@ -45,7 +43,7 @@ def selection(data):
         data[i][1] = 'red'
         data[smallpos][1] = 'blue'
 
-        data[i] , data[smallpos] = data[smallpos] , data[i]
+        data[i], data[smallpos] = data[smallpos], data[i]
 
         yield(data)
 
@@ -60,7 +58,7 @@ def selection(data):
 def insertion(data):
     data[0][1] = 'green'
 
-    for i in range(1,n):
+    for i in range(1, n):
         x = data[i][0]
         j = i-1
         data[i][1] = 'red'
@@ -68,7 +66,7 @@ def insertion(data):
         data[j+1][1] = 'green'
         while(j>=0 and x<data[j][0]):
             data[j+1][0] = data[j][0]
-            data[j] = [x,'red']
+            data[j] = [x, 'red']
             yield(data)
             data[j][1] = 'green'
             j -= 1

@@ -33,27 +33,33 @@ fps = args.fps
 
 #generate shuffled list
 def datagen():
-    data = [[i,'white'] for i in range(1,n+1)]
+    data = [[i+1, 'white'] for i in range(n)]
     random.shuffle(data)
     return data
 
 #animate the sorting
-def animate(algo,data):
-    data_backup = deepcopy(data)
+def animate(algo, data):
     pygame.init()
     clk = pygame.time.Clock()
-    dis = pygame.display.set_mode((w,h))
+    dis = pygame.display.set_mode((w, h))
     running = True
 
     while running:
-        data = deepcopy(data_backup)
-        datalist = algo(data)
-        for data in datalist:
+        animation = algo(deepcopy(data))
+        for frame in animation:
             dis.fill('black')
 
             #drawing rectangles for the data
             for i in range(n):
-                pygame.draw.rect(dis,data[i][1],[i*(w/n),h-(h/n)*data[i][0],(w/n),(h/n)*data[i][0]])
+                pygame.draw.rect(
+                    dis, frame[i][1],
+                    (
+                        i*(w/n),                #bar top left corner x-coordinate
+                        h-(h/n)*frame[i][0],    #bar top left corner y-coordinate
+                        (w/n),                  #bar width
+                        (h/n)*frame[i][0]       #bar height
+                    )
+                )
             
             pygame.display.flip()   #update the display
 
@@ -83,14 +89,20 @@ def main():
     if algo:
         algo = globals()[algo]
     else:
-        algos = [bubble,selection,insertion]      #list of available algorithms
-        algo = int(input('Algorithms:\n1. Bubble\n2. Selection\n3. Insertion\nEnter choice(0 to exit):'))
-        if algo in range(1,len(algos)+1):
+        algos = [bubble, selection, insertion]      #list of available algorithms
+        algo = int(input(
+            'Algorithms:\n'
+            '1. Bubble\n'
+            '2. Selection\n'
+            '3. Insertion\n'
+            'Enter choice(0 to exit):'
+        ))
+        if algo in range(1, len(algos)+1):
             algo = algos[algo-1]
         else:
             exit()
     
-    animate(algo,data)
+    animate(algo, data)
 
 if __name__ == "__main__":
     main()

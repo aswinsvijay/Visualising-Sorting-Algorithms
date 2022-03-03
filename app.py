@@ -37,7 +37,7 @@ class VisualLabel(QLabel):
             try:
                 frame = next(self.animation)
             except StopIteration:
-                self.animation = self.algo(deepcopy(self.data))
+                self.create_animation(self.algo)
                 continue
 
             n = len(frame)

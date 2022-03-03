@@ -30,28 +30,24 @@ class VisualLabel(QLabel):
 
     def create_animation(self, algo):
         self.algo = algo
-        try:
-            self.animation = self.algo(deepcopy(self.data))
-        except TypeError:
-            self.animation = None
+        self.animation = self.algo(deepcopy(self.data))
 
     def run(self):
         while True:
-            if self.animation is not None:
-                try:
-                    frame = next(self.animation)
-                except StopIteration:
-                    self.animation = self.algo(deepcopy(self.data))
-                    continue
+            try:
+                frame = next(self.animation)
+            except StopIteration:
+                self.animation = self.algo(deepcopy(self.data))
+                continue
 
-                n = len(frame)
-                img = np.zeros((n, n, 3), dtype=np.uint8)
-                for i in range(n):
-                    cv2.rectangle(img, (i, n-frame[i][0]), (i, n-1), frame[i][1])
+            n = len(frame)
+            img = np.zeros((n, n, 3), dtype=np.uint8)
+            for i in range(n):
+                cv2.rectangle(img, (i, n-frame[i][0]), (i, n-1), frame[i][1])
 
-                pixmap = toPixmap(img)
-                pixmap = pixmap.scaled(self.width(), self.height())
-                self.setPixmap(pixmap)
+            pixmap = toPixmap(img)
+            pixmap = pixmap.scaled(self.width(), self.height())
+            self.setPixmap(pixmap)
 
             loop = QEventLoop()
             speed = self.parent().parent().tools_label.speed.value()
